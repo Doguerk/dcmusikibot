@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Color Flow</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <img src="./assets/logo.svg" alt="Color Flow logo" class="logo" />
+    <nav class="top-nav">
+      <a href="./">Home</a>
+      <a href="./leaderboard.html">Leaderboard</a>
+      <a class="btn primary" href="./play/">Play</a>
+    </nav>
+  </header>
+
+  <main class="about">
+    <h1>About Color Flow</h1>
+    <p><strong>Short mission:</strong> Create a fast, accessible, ADHD-friendly, ultra-addictive HTML5 Canvas game.</p>
+
+    <h2>How to play</h2>
+    <p>Tap/click or press SPACE to cycle the color of the left collector. Blocks spawn on the right and move left. When a block reaches the collector line, match its color to catch it. A mismatch ends the game immediately.</p>
+
+    <h2>Scoring & Combo</h2>
+    <ul>
+      <li>Base points: 10</li>
+      <li>Streak increments by 1 per catch.</li>
+      <li>Multiplier = min(5, 1 + floor(streak/3) * 0.5).</li>
+      <li>Points per catch = round(basePoints * multiplier * (1 + min(streak,100)/100)).</li>
+    </ul>
+
+    <h2>Difficulty</h2>
+    <p>Difficulty increases <strong>every 10 seconds</strong> (time-based) with a linear curve by default. It reduces spawn interval and increases block speed until configured caps. You can switch to exponential in <code>js/config.js</code>.</p>
+
+    <h2>Accessibility & ADHD-friendly</h2>
+    <ul>
+      <li><strong>Color-blind mode:</strong> toggles high-contrast patterns for colors.</li>
+      <li><strong>Keyboard:</strong> SPACE cycles colors; TAB navigates UI.</li>
+      <li><strong>Instant feedback:</strong> particles, score pops, and short SFX.</li>
+      <li><strong>Vibration:</strong> optional short haptic on catch if available.</li>
+    </ul>
+
+    <p>See README for postMessage integration, tests, and deployment.</p>
+  </main>
+</body>
+</html>

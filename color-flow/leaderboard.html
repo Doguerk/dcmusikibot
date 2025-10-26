@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Flow — Leaderboard (Stub)</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <img src="./assets/logo.svg" alt="Color Flow logo" class="logo" />
+    <nav class="top-nav">
+      <a href="./">Home</a>
+      <a href="./about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="leaderboard">
+    <h1>Leaderboard (Client-only Stub)</h1>
+    <p>Posts and reads are stored locally in your browser. Replace this with a real API later. Documented in README.</p>
+
+    <form id="post-form" class="panel" aria-label="Post score">
+      <input type="text" id="name" placeholder="Name" aria-label="Name" required maxlength="16" />
+      <input type="number" id="score" placeholder="Score" aria-label="Score" required min="0" />
+      <button class="btn primary" type="submit">Post</button>
+    </form>
+
+    <table aria-label="Top scores">
+      <thead>
+        <tr><th>#</th><th>Name</th><th>Score</th><th>When</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+
+  <script src="./js/leaderboard-client.js"></script>
+  <script>
+    (function(){
+      const rows = document.getElementById('rows');
+      function rel(t){
+        const d = Date.now() - t; const m = Math.floor(d/60000);
+        if (m<1) return 'just now'; if (m<60) return m+'m ago';
+        const h = Math.floor(m/60); if (h<24) return h+'h ago';
+        const dd = Math.floor(h/24); return dd+'d ago';
+      }
+      async function refresh(){
+        const list = await window.LeaderboardClient.getTop({ top: 10 });
+        rows.innerHTML = '';
+        list.forEach((it, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${idx+1}</td><td>${it.name}</td><td>${it.score}</td><td>${rel(it.date||Date.now())}</td>`;
+          rows.appendChild(tr);
+        });
+      }
+      document.getElementById('post-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim() || 'Anon';
+        const score = parseInt(document.getElementById('score').value,10) || 0;
+        await window.LeaderboardClient.postScore({ name, score });
+        await refresh();
+        e.target.reset();
+      });
+      refresh();
+    })();
+  </script>
+</body>
+</html>
