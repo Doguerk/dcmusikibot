@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Play Color Flow</title>
+  <meta name="description" content="Tap/click or press SPACE to cycle color. Match incoming blocks." />
+  <link rel="manifest" href="../manifest.json" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="play-container">
+  <header class="hud" role="banner">
+    <div class="pill" aria-live="polite">Score: <span id="score">0</span></div>
+    <div class="pill" aria-live="polite">Multiplier: <span id="multiplier">1.0x</span></div>
+    <div class="pill" aria-live="polite">Best: <span id="best">0</span></div>
+    <div class="controls">
+      <button id="pause-btn" class="btn secondary" aria-pressed="false" aria-label="Pause or resume game">Pause</button>
+      <button id="restart-btn" class="btn secondary" aria-label="Restart game">Restart</button>
+      <button id="share-btn" class="btn secondary" aria-label="Share score">Share</button>
+    </div>
+  </header>
+
+  <div class="canvas-wrap">
+    <canvas id="game-canvas" width="960" height="640" aria-label="Color Flow game canvas" role="img"></canvas>
+
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="go-title">
+      <div class="card">
+        <h2 id="go-title">Game Over</h2>
+        <p>Score: <strong id="final-score">0</strong></p>
+        <p>Best: <strong id="final-best">0</strong></p>
+        <div class="actions">
+          <a class="btn primary" href="../leaderboard.html" id="go-leaderboard">Leaderboard</a>
+          <button class="btn secondary" id="play-again">Play again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="panel" role="contentinfo">
+    <label><input type="checkbox" id="sound-toggle" checked /> Sound</label>
+    <label><input type="checkbox" id="vibration-toggle" checked /> Vibration</label>
+    <label><input type="checkbox" id="colorblind-toggle" /> Color‑blind mode</label>
+    <span class="hint" aria-live="polite">Hint: Tap/click or press SPACE to cycle color. Match incoming blocks.</span>
+  </footer>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/audio.js"></script>
+  <script src="../js/ui.js"></script>
+  <script type="module" src="./game-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline — Color Flow</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="about">
+    <h1>You're offline</h1>
+    <p>Color Flow core files are not available right now. Try again when you're back online.</p>
+    <p>Last best score on this device: <strong id="best">0</strong></p>
+    <p><a class="btn primary" href="./">Back to Home</a></p>
+  </main>
+  <script src="./js/storage.js"></script>
+  <script>
+    (function(){
+      const bestEl = document.getElementById('best');
+      try {
+        const best = (window.StorageAPI && window.StorageAPI.getBestScore()) || 0;
+        bestEl.textContent = String(best);
+      } catch(e){ /* ignore */ }
+    })();
+  </script>
+</body>
+</html>

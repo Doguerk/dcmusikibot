@@ -1,0 +1,11 @@
+{
+  "name": "Color Flow",
+  "short_name": "ColorFlow",
+  "start_url": "/color-flow/index.html",
+  "display": "standalone",
+  "background_color": "#0e0e16",
+  "theme_color": "#4DA6FF",
+  "icons": [
+    { "src": "./assets/logo.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
